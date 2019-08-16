@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../ext-3.3.0-all/resources/css/ext-all.css">
+    <script src="../ext-3.3.0-all/adapter/ext/ext-base.js"></script>
+    <script src="../ext-3.3.0-all/ext-all.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+
+<script type="text/javascript">
+
+    Ext.onReady(function () {
+
+        
+        var currentChosedNode = null;
+        
+        var menu = new Ext.menu.Menu({
+            id: 'menu',
+            items: [{
+                id: 'add-student',
+                text: 'Add Student'
+            },{
+                id: 'add-class',
+                text: 'Add Class'
+            },{
+                id: 'delete-node',
+                text: 'Delete'
+            }],
+
+            listeners: {
+                itemclick: function (item) {
+                    var chosedNode = item.parentMenu.contextNode;
+                    switch (item.id) {
+                        case 'delete-node':
+                            deleteNode(chosedNode);
+                            break;
+                        case 'add-student':
+                            addStudentByMsgBox(chosedNode);
+                            break;
+                        case  'add-class':
+                            addClassByMsgBox();
+                            break;
+                    }
+                }
+            }
+        });
+
+
+        var add_student_fieldset = new Ext.form.FieldSet({
+            title: 'Add-Student',
+            width: 350,
+            layout:'table',
+            style:'padding-left: 40px',
+            layoutConfig:{
+                columns: 2
+            },
+
+            items: [
+                {
+                    id: 'inputValue',
+                    width: 200,
+                    xtype: 'textfield',
+                    style:'margin-right: 5px;',
+                    emptyText: 'Please input the student name'
+                },
+                {
+                    xtype: 'button',
+                    text: "Add",
+                    width: 60,
+                    listeners: {
+                        'click': addStudentByClickButton
+                    }
+                }
+            ]
+        });
+
+
+        var tree = new Ext.tree.TreePanel({
+
+            id: 'tree',
+            title: 'student management',
+            width: 352,
+            renderTo: 'test',
+            loader: new Ext.tree.TreeLoader({dataUrl: 'resource/TreeData.txt'}),
+            root: new Ext.tree.AsyncTreeNode({text: "School"}),
+            enableDD: true,
+            useArrows: true,
+            autoScroll: true,
+            animate: true,
+            rootVisible: true,
+            contextMenu: menu,
+
+            listeners: {
+
+                contextmenu: function (node, e) {
+                    node.select();
+                    var c = node.getOwnerTree().contextMenu;
+                    c.contextNode = node;
+                    c.showAt(e.getXY());
+                },
+
+                click: function (item) {
+                    console.log(item.text);
+                    currentChosedNode = item;
+                }
+
+            },
+
+            items: [
+                add_student_fieldset
+            ]
+
+        });
+
+
+        new Ext.tree.TreeEditor(tree, {allowBlank: false});
+
+        tree.expandAll();
+
+        
+    })
+
+
+</script>
+
+<body>
+
+<div id="test"></div>
+
+</body>
+</html>

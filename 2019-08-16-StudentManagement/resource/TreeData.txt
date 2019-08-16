@@ -1,0 +1,17 @@
+[
+
+    {
+       text:'Sun',
+       children:[
+            {text:'Jack',leaf:true },
+            {text:'Jone',leaf : true },
+            {text:'Amy',leaf : true }
+       ]
+    }
+    ,
+    {
+        text:'Moon',
+        children:[]
+    }
+
+]
