@@ -2,14 +2,14 @@
 
 const addStudent = function (currentNode, inputValue) {
     if (currentNode.isLeaf() === true) {
-        currentNode.parentNode.appendChild(new Ext.tree.TreeNode({text: inputValue}));
+        currentNode.parentNode.appendChild(new Ext.tree.TreeNode({text: inputValue,icon:'resource/student.png',leaf: true}));
     } else {
-        currentNode.appendChild(new Ext.tree.TreeNode({text: inputValue, leaf: true}));
+        currentNode.appendChild(new Ext.tree.TreeNode({text: inputValue,icon:'resource/student.png',leaf: true}));
     }
 };
 
 const addClassFromRoot = function (className) {
-    Ext.getCmp('tree').getRootNode().appendChild(new Ext.tree.TreeLoader({text: className, children: []}));
+    Ext.getCmp('tree').getRootNode().appendChild(new Ext.tree.TreeLoader({text: className, icon:'resource/class.png', children: []}));
 };
 
 
@@ -39,7 +39,7 @@ const addClassByMsgBox = function () {
     });
 };
 
-const addStudentByClickButton = function () {
+const addStudentByClickButton = function (currentNode) {
     var inputValue = Ext.getCmp('inputValue').getValue();
     if (currentNode != null) {
         console.log(currentNode.isLeaf());

@@ -14,9 +14,9 @@
 
     Ext.onReady(function () {
 
-        
+
         var currentChosedNode = null;
-        
+
         var menu = new Ext.menu.Menu({
             id: 'menu',
             items: [{
@@ -71,7 +71,13 @@
                     text: "Add",
                     width: 60,
                     listeners: {
-                        'click': addStudentByClickButton
+                        'click': function () {
+                            console.log(currentChosedNode);
+                            var inputValue = Ext.getCmp('inputValue').getValue();
+                            if (currentChosedNode != null) {
+                                addStudent(currentChosedNode, inputValue);
+                            }
+                        }
                     }
                 }
             ]
@@ -85,7 +91,7 @@
             width: 352,
             renderTo: 'test',
             loader: new Ext.tree.TreeLoader({dataUrl: 'resource/TreeData.txt'}),
-            root: new Ext.tree.AsyncTreeNode({text: "School"}),
+            root: new Ext.tree.AsyncTreeNode({text: "School",icon:'resource/school.png'}),
             enableDD: true,
             useArrows: true,
             autoScroll: true,
@@ -120,7 +126,7 @@
 
         tree.expandAll();
 
-        
+
     })
 
 

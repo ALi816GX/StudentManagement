@@ -2,15 +2,17 @@
 
     {
        text:'Sun',
+       icon:'resource/class.png',
        children:[
-            {text:'Jack',leaf:true },
-            {text:'Jone',leaf : true },
-            {text:'Amy',leaf : true }
+            {text:'Jack',icon:'resource/student.png',leaf:true },
+            {text:'Jone',icon:'resource/student.png',leaf : true },
+            {text:'Amy',icon:'resource/student.png',leaf : true }
        ]
     }
     ,
     {
         text:'Moon',
+        icon:'resource/class.png',
         children:[]
     }
 
