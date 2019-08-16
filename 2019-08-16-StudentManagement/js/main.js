@@ -38,11 +38,3 @@ const addClassByMsgBox = function () {
         }
     });
 };
-
-const addStudentByClickButton = function (currentNode) {
-    var inputValue = Ext.getCmp('inputValue').getValue();
-    if (currentNode != null) {
-        console.log(currentNode.isLeaf());
-        addStudent(currentNode, inputValue);
-    }
-};

@@ -52,6 +52,7 @@
         var add_student_fieldset = new Ext.form.FieldSet({
             title: 'Add-Student',
             width: 350,
+            height:80,
             layout:'table',
             style:'padding-left: 40px',
             layoutConfig:{
@@ -64,7 +65,8 @@
                     width: 200,
                     xtype: 'textfield',
                     style:'margin-right: 5px;',
-                    emptyText: 'Please input the student name'
+                    emptyText: 'Please input the student name',
+                    msgTarget: 'under'
                 },
                 {
                     xtype: 'button',
@@ -72,10 +74,17 @@
                     width: 60,
                     listeners: {
                         'click': function () {
-                            console.log(currentChosedNode);
                             var inputValue = Ext.getCmp('inputValue').getValue();
-                            if (currentChosedNode != null) {
-                                addStudent(currentChosedNode, inputValue);
+                            if(inputValue === ''){
+                                Ext.getCmp('inputValue').markInvalid('student name can not be empty');
+                            }else {
+                                if(currentChosedNode == null){
+                                    Ext.getCmp('inputValue').markInvalid('please choose the class!');
+                                }else {
+                                    if (currentChosedNode != null) {
+                                        addStudent(currentChosedNode, inputValue);
+                                    }
+                                }
                             }
                         }
                     }
